@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="iconos/logo-apiapp.png" type="image/x-icon">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            /* background-image: url(../images/Home.jpg);
+            background-attachment: fixed;
+            background-position: center;
+            background-size: cover;
+            background-position-y: 60px; */
+            font-family: Arial, sans-serif;
+            background-color: #d8cfef;
+            text-align: center;
+        }
+
+        header {
+            display: flex;
+            background-color: #6a3edb;
+            height: 50px;
+            color: white;
+            font-size: 16px;
+            padding: 2px;
+            text-align: center;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0px 0px 10px 5px rgb(45, 43, 43);
+        }
+
+        .logo {
+            background: white;
+            border-radius: 50%;
+            height: 40px;
+            width: 80px;
+            margin: 5px 20px 1px 15px;
+        }
+
+        .menu-icon {
+            display: none;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 130px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 3px 5px 3px 5px;
+            margin: 5px 15px;
+            transition: color 0.3s ease;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        nav a:hover {
+            background: white;
+            color: blue;
+        }
+
+        @media only screen and (max-width: 824px) {
+            .menu {
+                display: none;
+                height: 220px;
+                width: 120px;
+            }
+
+            header {
+                justify-content: space-between;
+            }
+
+            .menu-icon {
+                display: block;
+                cursor: pointer;
+                font-size: 25px;
+                padding: 0px 20px;
+                margin: 8px;
+            }
+
+            nav a:hover {
+                width: 100%;
+            }
+
+            nav {
+                flex-direction: column;
+                top: 56px;
+                position: fixed;
+                margin-left: 2px;
+                background-color: #6a3edb;
+                box-shadow: 3px 3px 10px 3px rgb(45, 43, 43);
+            }
+
+            nav.show {
+                display: flex;
+            }
+        }
+
+        /*imagines*/
+        .imagines {
+            width: 100px;
+            height: 100px;
+        }
+
+        .card .h4 {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .card:hover {
+            transform: translateY(-15px);
+            transition: transform 0.2s ease-in;
+        }
+
+        .card,
+        .escritorio {
+            background-color: #fff;
+            color: #333;
+            text-align: center;
+            border-radius: 10px;
+            box-shadow: 10px 10px 10px rgb(45, 43, 43);
+            padding: 20px;
+            margin: 15px;
+        }
+
+        .escritorio {
+            margin-top: 100px;
+            width: 60%;
+            height: 55%;
+        }
+
+        .flex {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            height: 100%;
+        }
+
+        footer {
+            display: flex;
+            background-color: #6a3edb;
+            height: 40px;
+            color: white;
+            font-size: 14px;
+            align-items: center;
+            justify-content: center;
+            margin-top: 100px;
+            box-shadow: 0px 0px 10px 5px rgb(45, 43, 43);
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="menu-icon" onclick="toggleMenu()">&#9776;</div>
+        <a href="index.html"><img class="logo" src="iconos/logo-apiapp.png" alt="Logo"></a>
+
+        <nav class="menu">
+            <a href="cine.html">Cine</a>
+            <a href="musica.html">Música</a>
+            <a href="#">Videos</a>
+            <a href="#">Audios</a>
+            <a href="#">Imágenes</a>
+            <a href="#">Documentos</a>
+        </nav>
+
+    </header>
+
+    <main>
+        <section class="iconos">
+            <img class="escritorio" src="iconos/escritorio3.jpeg" alt="escritorio">
+
+            <h1 class="texto" style="font-family: gabriola; font-size: 60px">Tus aplicaciones favoritas en el mismo
+                sitio.</h1>
+            <div class="flex">
+                <div class="card">
+                    <a href="cine.html">
+                        <h4>Cine</h4>
+                    </a>
+                    <a href="cine.html"><img class="imagines" src="iconos/cine.png" alt="Cine"></a>
+                </div>
+                <div class="card">
+                    <a href="musica.html">
+                        <h4>Música</h4>
+                    </a>
+                    <a href="musica.html"><img class="imagines" src="iconos/musica1.png" alt="Música"></a>
+                </div>
+                <div class="card">
+                    <a href="index.html">
+                        <h4>Videos</h4>
+                    </a>
+                    <a href="index.html"><img class="imagines" src="iconos/video2.png" alt="Videos"></a>
+                </div>
+                <div class="card">
+                    <a href="index.html">
+                        <h4>Audios</h4>
+                    </a>
+                    <a href="index.html"><img class="imagines" src="iconos/audio.png" alt="Audios"></a>
+                </div>
+                <div class="card">
+                    <a href="index.html">
+                        <h4>Imágenes</h4>
+                    </a>
+                    <a href="index.html"><img class="imagines" src="iconos/imagenes2.png" alt="Imágenes"></a>
+                </div>
+                <div class="card">
+                    <a href="index.html">
+                        <h4>Documentos</h4>
+                    </a>
+                    <a href="index.html"><img class="imagines" src="iconos/documentos3.png" alt="Documentos"></a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>API-APP Ⓒ Copyright 2023. Todos los derechos reservados.</p>
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            var nav = document.querySelector('nav');
+            nav.classList.toggle('show');
+        }
+    </script>
+
+</body>
+
+</html>

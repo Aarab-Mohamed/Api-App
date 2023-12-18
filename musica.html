@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+   <title>Cine</title>
+   <style>
+      html, body{
+         margin: 0;
+         padding: 0;
+         box-sizing: border-box;
+      }
+
+      body {
+         background-image: url(iconos/imagen-spotify.png);
+         font-family: Arial, sans-serif;
+         background-color: #d8cfef;
+         margin-bottom: 160px;
+         display: flex;
+         justify-content: center; 
+         flex-direction: column;
+         font-size: 16px;
+      }
+
+      header {
+         display: flex;
+         justify-content: space-between;
+         align-items: center;
+         background-color: #6a3edb;
+         color: white;
+         position: fixed;
+         width: 100%;
+         top: 0;
+         z-index: 1000;
+         box-shadow: 0px 0px 10px 5px rgb(45, 43, 43);
+      }
+
+      .logo {
+         background: white;
+         border-radius: 50%;
+         height: 40px;
+         width: 80px;
+         margin: 5px 0px 5px 15px;
+      }
+
+      .menu-icon {
+         display: none;
+      }
+
+      nav {
+         display: flex;
+         align-items: center;
+         justify-content: center;
+      }
+
+      nav a {
+         color: white;
+         text-decoration: none;
+         padding: 3px 5px 3px 5px;
+         margin: 0px 10px;
+         transition: color 0.3s ease;
+      }
+
+      nav a:hover {
+         background: white;
+         color: blue;
+      }
+
+      #busqueda {
+         display: flex;
+         height: 25px;
+         gap: 10px;
+         padding-right: 30px;
+         font-size: 16px;
+      }
+
+      input {
+         padding-left: 10px;
+         font-size: 16px;
+      }
+
+      #searchInput {
+         border-radius: 3px;
+         border: 1px solid #3c3838;
+      }
+
+      #button-busqueda {
+         background-color: #ad9bdb;
+         display: flex;
+         align-items: center;
+         width: 70px;
+         border-radius: 3px;
+         border: 1px solid #3c3838;
+         font-size: 16px;
+         color: black;
+      }
+
+
+      .Copyright {
+         display: flex;
+         position: fixed;
+         width: 100%;
+         bottom: 0;
+         justify-content: center;
+         align-items: center;
+         background: #6a3edb;
+         color: white;
+         height: 40px;
+         box-shadow: 0px 0px 10px 5px rgb(45, 43, 43);
+      }
+      #cancionesEncontradas{
+            display: flex;
+         justify-content: space-between;
+         align-items: center;
+         background: rgb(177, 182, 181);
+         height: 60px;
+         border: 2px solid rgb(92, 75, 75);
+         border-radius: 50px;
+         font-size: 16px;
+         margin-left: 10px;
+         padding-left: 20px;  
+        }
+        #button-play {
+            background-color: green;
+            border: 1px solid white;
+            width: 45px;
+            height: 45px;
+            border-radius: 50px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+
+        #results {
+            display: flex;
+            flex-direction: column;
+            width: 450px;
+        }
+
+      @media only screen and (max-width: 450px) {
+         .div-logo {
+            display: none;
+         }
+      }
+
+      @media only screen and (max-width: 920px) {
+         header {
+            justify-content: space-between;
+         }
+
+         .menu {
+            display: none;
+            height: 210px;
+            width: 120px;
+            margin-left: 2px;
+            top: 57px;
+            text-align: center;
+         }
+
+         .menu-icon {
+            display: block;
+            cursor: pointer;  
+            font-size: 25px;
+            padding: 0px 20px;
+            margin: 8px;
+         }
+
+         nav a:hover {
+            width: 100%;
+         }
+
+         nav {
+            flex-direction: column;
+            position: fixed;
+            background-color: #6a3edb;
+            box-shadow: 3px 3px 10px 3px rgb(45, 43, 43);
+         }
+
+         nav.show {
+            display: flex;
+         }
+      }
+
+   </style>
+</head>
+
+<body>
+   <header>
+      <div class="menu-icon" onclick="toggleMenu()">&#9776;</div>
+      <div class="div-logo"><a href="index.html"><img class="logo" src="iconos/logo-apiapp.png" alt="Logo"></a></div>
+
+      <nav class="menu">
+         <a href="cine.html">Cine</a>
+         <a href="musica.html">Música</a>
+         <a href="#">Videos</a>
+         <a href="#">Audios</a>
+         <a href="#">Imágenes</a>
+         <a href="#">Documentos</a>
+      </nav>
+
+      <div id="busqueda">
+         <input type="text" id="searchInput" placeholder="Nombre de la canción">
+         <button id="button-busqueda" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
+            onclick="buscarCancion()">Buscar</button>
+      </div>
+   </header>
+   <main>
+
+      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+         <div class="modal-dialog modal-dialog-scrollable">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <h1 class="modal-title fs-5" id="exampleModalLabel">Canciones encontradas :</h1>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+               </div>
+               <div class="modal-body">
+                  <div id="results"></div>
+               </div>
+               <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+               </div>
+            </div>
+         </div>
+      </div>
+   </main>
+
+
+
+
+
+   <footer>
+      <div class="Copyright">
+         <h>API-APP Ⓒ Copyright 2023. Todos los derechos reservados.</h>
+      </div>
+   </footer>
+
+   <!-- <script>--------- </script> -->
+
+   <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.1.6/js/swiper.js"></script> -->
+   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+      crossorigin="an onymous"></script>
+   <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
+
+   <script>
+      function toggleMenu() {
+         var nav = document.querySelector('nav');
+         nav.classList.toggle('show');
+      }	
+   </script>
+   <script>
+      function buscarCancion() {
+          const searchInput = document.getElementById('searchInput').value;
+
+          // Reemplaza 'TU_CLIENT_ID' y 'TU_CLIENT_SECRET' con tus credenciales de Spotify
+          const clientId = '82ac376a0719479393fb8db0d2ed15c4';
+          const clientSecret = '9c79cff58bdc48c5bcf62117113f7557';
+          const accessToken = btoa(`${clientId}:${clientSecret}`);
+
+          // Realiza una solicitud para obtener el token de acceso
+          fetch('https://accounts.spotify.com/api/token', {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/x-www-form-urlencoded',
+                  'Authorization': `Basic ${accessToken}`
+              },
+              body: 'grant_type=client_credentials'
+          })
+              .then(response => response.json())
+              .then(data => {
+                  const token = data.access_token;
+
+                  // Usa el token para buscar canciones
+                  fetch(`https://api.spotify.com/v1/search?q=${searchInput}&type=track`, {
+                      method: 'GET',
+                      headers: {
+                          'Authorization': `Bearer ${token}`
+                      }
+                  })
+                      .then(response => response.json())
+                      .then(data => {
+                          mostrarResultados(data.tracks.items);
+                      })
+                      .catch(error => console.error('Error al buscar canción:', error));
+              })
+              .catch(error => console.error('Error al obtener token de acceso:', error));
+      }
+
+      function mostrarResultados(tracks) {
+          const resultsContainer = document.getElementById('results');
+          resultsContainer.innerHTML = '';
+
+          tracks.forEach(track => {
+              const trackName = track.name;
+              const trackUri = track.uri;
+
+              const resultItem = document.createElement('div');
+              resultItem.innerHTML = `<p id="cancionesEncontradas">${trackName} <button id="button-play" onclick="reproducirCancion('${trackUri}')"><img src="iconos/play.svg" alt="Icono-Play"></button></p>`;
+              resultsContainer.appendChild(resultItem);
+
+          });
+      }
+
+      function reproducirCancion(uri) {
+          // Abre la aplicación de Spotify para reproducir la canción
+          window.location.href = uri;
+      }
+  </script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.1.6/css/swiper.css">
+  <title>Cine</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #d8cfef;
+      margin-bottom: 160px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      font-size: 16px;
+
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #6a3edb;
+      color: white;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0px 0px 10px 5px rgb(45, 43, 43);
+    }
+
+    .logo {
+      background: white;
+      border-radius: 50%;
+      height: 40px;
+      width: 80px;
+      margin: 5px 0px 5px 15px;
+    }
+
+    .menu-icon {
+      display: none;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      padding: 3px 5px 3px 5px;
+      margin: 0px 10px;
+      transition: color 0.3s ease;
+    }
+
+    nav a:hover {
+      background: white;
+      color: blue;
+    }
+
+    #busqueda {
+      display: flex;
+      height: 25px;
+      gap: 10px;
+      padding-right: 30px;
+      font-size: 16px;
+    }
+    input {
+      padding-left: 10px;
+      font-size: 16px;
+    }
+    #searchInput {
+      border-radius: 3px;
+      border: 1px solid #3c3838;
+    }
+   
+    button {
+      background-color: #ad9bdb;
+      width: 70px;
+      border-radius: 3px;
+      border: 1px solid #3c3838;
+      font-size: 16px;
+    }
+
+    .swiper-container {
+      width: 1000px;
+      padding-top: 80px;
+    }
+
+    .swiper-slide {
+      width: 300px;
+    }
+
+    .contenedor {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      width: 80%;
+      height: auto;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 60px;
+      font-size: 14px;
+    }
+
+    .pelicula {
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 200px;
+      padding-bottom: 10px;
+      border-radius: 15px;
+      border: 1px solid #756e6e;
+      box-shadow: 10px 10px 10px rgb(45, 43, 43);
+    }
+
+    .pelicula a {
+      background: #756e6e;
+      color: red;
+      padding-top: 4px;
+      margin-top: 10px;
+      border-radius: 15px;
+      box-shadow: 4px 5px 4px rgb(45, 43, 43);
+      width: 60px;
+      height: 30px;
+      text-align: center;
+      text-decoration: none;
+    }
+
+    .contenedor .pelicula .poster {
+      width: 200px;
+      height: 250px;
+      margin-bottom: 10px;
+      border-radius: 15px;
+    }
+
+    footer {
+      position: fixed;
+      background-color: #d8cfef;
+      width: 100%;
+      bottom: 0;
+      padding-top: 15px;
+    }
+
+    .paginacion {
+      display: flex;
+      background-color: #d8cfef;
+      width: 100%;
+      justify-content: center;
+      gap: 40px;
+    }
+
+    .Copyright {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #6a3edb;
+      margin-top: 20px;
+      color: white;
+      height: 40px;
+      box-shadow: 0px 0px 10px 5px rgb(45, 43, 43);
+    }
+
+    .paginacion button {
+      cursor: pointer;
+      font-size: 16px;
+      height: 40px;
+      width: 120px;
+      background: #392d59;
+      color: #fff;
+      border-radius: 100px;
+      box-shadow: 4px 5px 4px rgb(45, 43, 43);
+    }
+
+    .paginacion button#btnAnterior:hover {
+      background: #137c32;
+      transform: translateX(-6px);
+      transition: transform 0.2s ease-in;
+    }
+
+    .paginacion button#btnSiguiente:hover {
+      background: #137c32;
+      transform: translateX(6px);
+      transition: transform 0.2s ease-in;
+    }
+
+
+    @media only screen and (max-width: 450px) {
+      .div-logo {
+        display: none;
+      }
+    }
+
+    @media only screen and (max-width: 920px) {
+      header {
+        justify-content: space-between;
+      }
+
+      .menu {
+        display: none;
+        height: 210px;
+        width: 120px;
+        margin-left: 2px;
+        top: 57px;
+        text-align: center;
+      }
+
+      .menu-icon {
+        display: block;
+        cursor: pointer;
+        font-size: 25px;
+        padding: 0px 20px;
+        margin: 8px;
+      }
+
+      nav a:hover {
+        width: 100%;
+      }
+
+      nav {
+        flex-direction: column;
+        position: fixed;
+        background-color: #6a3edb;
+        box-shadow: 3px 3px 10px 3px rgb(45, 43, 43);
+      }
+
+      nav.show {
+        display: flex;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="menu-icon" onclick="toggleMenu()">&#9776;</div>
+    <div class="div-logo"><a href="index.html"><img class="logo" src="iconos/logo-apiapp.png" alt="Logo"></a></div>
+
+    <nav class="menu">
+      <a href="cine.html">Cine</a>
+      <a href="musica.html">Música</a>
+      <a href="#">Videos</a>
+      <a href="#">Audios</a>
+      <a href="#">Imágenes</a>
+      <a href="#">Documentos</a>
+    </nav>
+    <div id="busqueda">
+      <!-- <label for="searchInput">Buscar película:</label> -->
+      <input type="text" id="searchInput" placeholder="Nombre de la pelicula">
+      <button onclick="buscarPelicula()">Buscar</button>
+    </div>
+  </header>
+
+  <div class="swiper-container">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide"><img src="iconos/poster1.jpg" alt=""></div>
+      <div class="swiper-slide"><img src="iconos/poster2.jpg" alt=""></div>
+      <div class="swiper-slide"><img src="iconos/poster3.jpg" alt=""></div>
+      <div class="swiper-slide"><img src="iconos/poster4.jpg" alt=""></div>
+      <div class="swiper-slide"><img src="iconos/poster5.jpg" alt=""></div>
+      <div class="swiper-slide"><img src="iconos/poster6.jpg" alt=""></div>
+      <div class="swiper-slide"><img src="iconos/poster7.jpg" alt=""></div>
+      <div class="swiper-slide"><img src="iconos/poster8.jpg" alt=""></div>
+      <div class="swiper-slide"><img src="iconos/poster9.jpg" alt=""></div>
+    </div>
+    <div class="swiper-button-prev"></div>
+    <div class="swiper-button-next"></div>
+  </div>
+
+  <div class="contenedor" id="contenedor"></div>
+
+  <footer>
+    <div class="paginacion">
+      <button id="btnAnterior">
+        << Anterior</button>
+          <button id="btnSiguiente">Siguiente >></button>
+    </div>
+    <div class="Copyright">
+      <h>API-APP Ⓒ Copyright 2023. Todos los derechos reservados.</h>
+    </div>
+  </footer>
+
+  <!-- <script src="app.js"></script> -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.1.6/js/swiper.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+  <script>
+    var mySwiper = new Swiper('.swiper-container', {
+      loop: true,
+      speed: 500,
+      autoplay: {
+        delay: 1000,
+      },
+      effect: 'coverflow',
+      grabCursor: true,
+      centeredSlides: true,
+      slidesPerView: 'auto',
+      coverflowEffect: {
+        rotate: 0,
+        stretch: 80,
+        depth: 200,
+        modifier: 1,
+        slideShadows: false,
+      },
+
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+    })
+  </script>
+
+  <script>
+    let pagina = 1;
+    const btnAnterior = document.getElementById("btnAnterior");
+    const btnSiguiente = document.getElementById("btnSiguiente");
+
+    btnSiguiente.addEventListener("click", () => {
+      if (pagina < 1000) {
+        // window.location.reload(true); // para recargar la pagina
+        window.scrollTo(0, 0);
+        pagina += 1;
+        cargarPeliculas();
+      }
+    });
+
+    btnAnterior.addEventListener("click", () => {
+      if (pagina > 1) {
+        window.scrollTo(0, 0);
+        pagina -= 1;
+        cargarPeliculas();
+      }
+    });
+
+    function buscarPelicula() {
+      const apiKey = "f9162d252a0cb02496f2dd406aa03bda";
+      const searchInput = document.getElementById("searchInput").value;
+
+      fetch(
+        `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=${searchInput}`
+      )
+        .then((response) => response.json())
+        .then((data) => {
+          cargarPeliculas(data.results);
+        })
+        .catch((error) => console.error("Error al buscar película:", error));
+    }
+
+    const cargarPeliculas = async () => {
+      const apiKey = "f9162d252a0cb02496f2dd406aa03bda";
+      const searchInput = document.getElementById("searchInput").value;
+      try {
+        const respuesta = await fetch(
+          `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=${searchInput}&page=${pagina}`);
+
+        if (respuesta.status === 200) {
+          const swiperContainer = document.querySelector(".swiper-container");
+          // document.body.removeChild(swiperContainer);
+          swiperContainer.innerHTML = '';
+
+          const datos = await respuesta.json();
+          let peliculas = "";
+
+          datos.results.forEach((pelicula) => {
+            peliculas += `
+					<div class="pelicula">
+						<img class="poster" src="https://image.tmdb.org/t/p/w500/${pelicula.poster_path}">
+						<h class="titulo">${pelicula.title}</h>
+						<a href="https://www.themoviedb.org/movie/${pelicula.id}" target="_blank"> +Info </a>
+					</div>
+				`;
+          });
+
+          document.getElementById("contenedor").innerHTML = peliculas;
+        } else if (respuesta.status === 401) {
+          alert("Pusiste la llave mal");
+        } else if (respuesta.status === 404) {
+          alert("La pelicula que buscas no existe");
+        } else {
+          alert("Hubo un error y no sabemos que paso");
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+  </script>
+
+  <script>
+    function toggleMenu() {
+      var nav = document.querySelector('nav');
+      nav.classList.toggle('show');
+    }	
+  </script>
+
+</body>
+
+</html>
